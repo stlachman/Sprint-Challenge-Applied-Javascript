@@ -20,7 +20,12 @@ class Carousel {
 			this.images.forEach((image) => (image.style.display = 'none'));
 			this.currentIndex--;
 			this.images[this.currentIndex].style.display = 'block';
-		} 
+		} else {
+			this.images.forEach((image) => (image.style.display = 'none'));
+			this.currentIndex = this.images.length;
+			this.currentIndex--;
+			this.images[this.currentIndex].style.display = 'block';
+		}
 	}
 
 	slideRight() {
