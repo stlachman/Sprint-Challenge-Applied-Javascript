@@ -3,9 +3,12 @@ class Carousel {
     this.carousel = carousel;
     this.leftButton = carousel.querySelector('.left-button');
     this.rightButton = carousel.querySelector('.right-button');
+    
     this.images = carousel.querySelectorAll('img');
-
-
+    this.currentIndex = 0;
+    
+    
+    
 
     this.leftButton.addEventListener('click', () => {
       this.slideLeft();
@@ -16,18 +19,25 @@ class Carousel {
     });
   }
   slideLeft() {
-    
+    if (this.currentIndex > 0) {
+      this.images.forEach(image => image.style.display = "none");
+      this.currentIndex--;
+      this.images[this.currentIndex].style.display = 'block';
+    }
   }
 
   slideRight() {
-    
+    if (this.currentIndex < this.images.length - 1) {
+      this.images.forEach(image => image.style.display = "none");
+      this.currentIndex++;
+      this.images[this.currentIndex].style.display = 'block';
+    }
   }
-
 }
+
 
 let carousel = document.querySelector('.carousel');
 const fancyCarousel = new Carousel(carousel);
-console.log(fancyCarousel);
 
 
 /* If You've gotten this far, you're on your own! Although we will give you some hints:
