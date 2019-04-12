@@ -1,6 +1,6 @@
 class TabLink {
 	constructor(tabElement) {
-		// assign this.tabElement to the tabElement DOM reference
+		// assign this.tabElement to the tabElement DOM reference which is an individual .tab 
 		this.tabElement = tabElement;
 
 		// Get the `data-tab` value from this.tabElement and store it here
@@ -16,10 +16,10 @@ class TabLink {
 			this.cards = document.querySelectorAll(`.card[data-tab="${this.tabData}"]`);
 		}
 
-		// Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class.
+		// Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element (this is a node list of all the .card elements selected above) into a new instance of the TabCard class. Pass in a card object to the TabCard class.
 		this.cards = Array.from(this.cards).map((card) => new TabCard(card));
 
-		// Add a click event that invokes this.selectTab
+		// Add a click event that invokes this.selectTab. This event handler sets the active state to the currently selected tab.
 		this.tabElement.addEventListener('click', () => {
 			this.selectTab();
 		});
@@ -38,10 +38,11 @@ class TabLink {
 		// Iterate through the NodeList setting the display style each one to 'none'
 		cards.forEach((card) => (card.style.display = 'none'));
 
-		// Add a class of ".active-tab" to this.tabElement
+		// Add a class of ".active-tab" to this.tabElement. This represent the currently currently selected tab.
 		this.tabElement.classList.add('active-tab');
 
-		// Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. Just un-comment the code and study what is happening here.
+    // Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. Just un-comment the code and study what is happening here.
+    // We iterate through the array of card DOM elements from above and add a selectCard method similar to the select tab method described here.
 		this.cards.forEach((card) => card.selectCard());
 	}
 }
@@ -68,6 +69,5 @@ class TabCard {
 */
 let tabs = document.querySelectorAll('.tab');
 tabs.forEach((tab) => {
-	const tabObj = new TabLink(tab);
-	console.log(tabObj);
+	new TabLink(tab);
 });
